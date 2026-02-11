@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pequeños Brillantes | Guardería y Preescolar en Monterrey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-mexicano: #E4007C;
+            --rosa-claro: #FF6BA3;
+            --rosa-pastel: #FFD6E7;
+            --turquesa: #00A19B;
+            --turquesa-claro: #4DD9D4;
+            --amarillo: #FFB800;
+            --amarillo-claro: #FFE066;
+            --naranja: #FF6D3A;
+            --morado: #8B5CF6;
+            --verde: #22C55E;
+            --crema: #FFF9F5;
+            --gris-texto: #374151;
+            --gris-claro: #6B7280;
+            --blanco: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--crema);
+            color: var(--gris-texto);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255,249,245,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--rosa-pastel);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gris-texto);
+        }
+
+        .logo span { color: var(--rosa-mexicano); }
+
+        .logo-emoji {
+            font-size: 1.8rem;
+            animation: wiggle 2s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gris-claro);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--rosa-mexicano); }
+
+        .nav-cta {
+            background: var(--rosa-mexicano);
+            color: white;
+            padding: 0.7rem 1.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--morado);
+            transform: scale(1.05);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 140px 5% 80px;
+            background: linear-gradient(135deg, var(--crema) 0%, var(--rosa-pastel) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--turquesa-claro);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            opacity: 0.2;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--turquesa);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            color: var(--gris-texto);
+        }
+
+        .hero h1 em {
+            color: var(--rosa-mexicano);
+            font-style: normal;
+            position: relative;
+        }
+
+        .hero h1 em::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--amarillo);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--gris-claro);
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+        }
+
+        .hero-checks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.25rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .hero-check {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero-check span {
+            font-size: 1.3rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--rosa-mexicano);
+            color: white;
+            box-shadow: 0 6px 20px rgba(228,0,124,0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--morado);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--gris-texto);
+            border: 3px solid var(--turquesa-claro);
+        }
+
+        .btn-secondary:hover {
+            background: var(--turquesa-claro);
+        }
+
+        .hero-images {
+            position: relative;
+        }
+
+        .hero-img-main {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 30px 80px 30px 80px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border: 5px solid white;
+        }
+
+        .hero-img-small {
+            position: absolute;
+            width: 45%;
+            border-radius: 20px;
+            bottom: -20px;
+            left: -30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 4px solid white;
+        }
+
+        .hero-card {
+            position: absolute;
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-card.c1 { top: 10%; right: 0; }
+        .hero-card.c2 { bottom: 30%; right: -10px; animation-delay: -1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            padding: 3rem 5%;
+            background: white;
+            margin-top: -40px;
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .stat:nth-child(1) { background: var(--rosa-pastel); }
+        .stat:nth-child(2) { background: var(--turquesa-claro); color: white; }
+        .stat:nth-child(3) { background: var(--amarillo-claro); }
+        .stat:nth-child(4) { background: var(--rosa-mexicano); color: white; }
+        .stat:nth-child(5) { background: #D1FAE5; }
+
+        .stat-num {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* SECTIONS */
+        section { padding: 5rem 5%; }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-tag {
+            color: var(--rosa-mexicano);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.4rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-desc {
+            color: var(--gris-claro);
+            font-size: 1.05rem;
+        }
+
+        /* PROGRAMAS */
+        .programas { background: var(--crema); }
+
+        .programas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .programa-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: 0.4s;
+            border: 3px solid transparent;
+        }
+
+        .programa-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .programa-card:nth-child(1):hover { border-color: var(--amarillo); }
+        .programa-card:nth-child(2):hover { border-color: var(--turquesa); }
+        .programa-card:nth-child(3):hover { border-color: var(--rosa-mexicano); }
+
+        .programa-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .programa-body { padding: 1.5rem; }
+
+        .programa-edad {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .programa-card:nth-child(1) .programa-edad { background: var(--amarillo-claro); color: #92400E; }
+        .programa-card:nth-child(2) .programa-edad { background: #CCFBF1; color: var(--turquesa); }
+        .programa-card:nth-child(3) .programa-edad { background: var(--rosa-pastel); color: var(--rosa-mexicano); }
+
+        .programa-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .programa-card > .programa-body > p {
+            color: var(--gris-claro);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .programa-list {
+            list-style: none;
+        }
+
+        .programa-list li {
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .programa-list li::before {
+            content: '✓';
+            background: var(--verde);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        /* HORARIOS */
+        .horarios {
+            background: linear-gradient(135deg, var(--turquesa) 0%, var(--morado) 100%);
+            color: white;
+        }
+
+        .horarios .section-tag { color: var(--amarillo); }
+        .horarios .section-title { color: white; }
+        .horarios .section-desc { color: rgba(255,255,255,0.85); }
+
+        .horarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .horario-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+
+        .horario-card:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+        }
+
+        .horario-card.destacado {
+            background: white;
+            color: var(--gris-texto);
+            transform: scale(1.05);
+            border: none;
+        }
+
+        .horario-card.destacado:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .horario-badge {
+            display: inline-block;
+            background: var(--rosa-mexicano);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .horario-card h3 { margin-bottom: 0.25rem; }
+
+        .horario-time {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .horario-desc {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+        }
+
+        .horario-list {
+            list-style: none;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .horario-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .horario-card.destacado .horario-list li {
+            border-color: #E5E7EB;
+        }
+
+        /* INSTALACIONES */
+        .instalaciones { background: white; }
+
+        .instalaciones-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .instalacion {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .instalacion img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .instalacion:hover img { transform: scale(1.1); }
+
+        .instalacion::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.75rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .instalacion:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* ALIMENTACIÓN */
+        .alimentacion {
+            background: var(--crema);
+        }
+
+        .alimentacion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .alimentacion-text .section-tag,
+        .alimentacion-text .section-title {
+            text-align: left;
+        }
+
+        .alimentacion-text p {
+            color: var(--gris-claro);
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 3px solid var(--amarillo-claro);
+        }
+
+        .menu-box h4 {
+            color: var(--rosa-mexicano);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .menu-item span { font-size: 1.2rem; }
+
+        .alimentacion-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .alimentacion-imgs img {
+            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .alimentacion-imgs img:first-child {
+            grid-row: span 2;
+            border-radius: 50px 16px 16px 16px;
+        }
+
+        /* SEGURIDAD */
+        .seguridad {
+            background: linear-gradient(135deg, var(--morado) 0%, var(--rosa-mexicano) 100%);
+            color: white;
+        }
+
+        .seguridad .section-tag { color: var(--amarillo); }
+        .seguridad .section-title { color: white; }
+        .seguridad .section-desc { color: rgba(255,255,255,0.85); }
+
+        .seguridad-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .seg-item {
+            background: rgba(255,255,255,0.12);
+            padding: 1.75rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .seg-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .seg-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+        .seg-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+
+        .seg-item p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        /* EQUIPO */
+        .equipo { background: white; }
+
+        .equipo-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .persona {
+            text-align: center;
+        }
+
+        .persona-foto {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 50% 50% 50% 20%;
+            margin-bottom: 1rem;
+            border: 4px solid var(--crema);
+            transition: 0.3s;
+        }
+
+        .persona:hover .persona-foto {
+            border-color: var(--rosa-mexicano);
+            transform: scale(1.05);
+        }
+
+        .persona h4 {
+            font-size: 1.1rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+
+        .persona .cargo {
+            color: var(--rosa-mexicano);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .persona .bio {
+            color: var(--gris-claro);
+            font-size: 0.85rem;
+        }
+
+        /* TESTIMONIOS */
+        .testimonios { background: var(--crema); }
+
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonio {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 3px solid #E5E7EB;
+            transition: 0.3s;
+        }
+
+        .testimonio:hover {
+            border-color: var(--turquesa);
+            transform: translateY(-5px);
+        }
+
+        .testimonio-stars {
+            color: var(--amarillo);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonio-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            color: var(--gris-texto);
+        }
+
+        .testimonio-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .testimonio-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonio-author strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .testimonio-author span {
+            font-size: 0.8rem;
+            color: var(--gris-claro);
+        }
+
+        /* PRECIOS */
+        .precios { background: white; }
+
+        .precios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .precio-card {
+            background: var(--crema);
+            padding: 2rem 1.5rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 3px solid #E5E7EB;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .precio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .precio-card.popular {
+            background: linear-gradient(135deg, var(--rosa-mexicano), var(--morado));
+            color: white;
+            border: none;
+            transform: scale(1.05);
+        }
+
+        .precio-card.popular:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .precio-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amarillo);
+            color: var(--gris-texto);
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .precio-card h3 { margin-bottom: 0.3rem; }
+
+        .precio-edad {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .precio-monto {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+        }
+
+        .precio-monto span {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .precio-nota {
+            font-size: 0.8rem;
+            opacity: 0.75;
+            margin-bottom: 1.25rem;
+        }
+
+        .precio-list {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .precio-list li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .precio-card.popular .precio-list li {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .precio-btn {
+            display: block;
+            padding: 0.85rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .precio-card:not(.popular) .precio-btn {
+            background: var(--rosa-mexicano);
+            color: white;
+        }
+
+        .precio-card.popular .precio-btn {
+            background: white;
+            color: var(--rosa-mexicano);
+        }
+
+        .precio-btn:hover { transform: scale(1.03); }
+
+        /* FAQ */
+        .faq { background: var(--crema); }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            border: 2px solid #E5E7EB;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover { border-color: var(--turquesa); }
+
+        .faq-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .faq-item h4::before {
+            content: '?';
+            background: var(--turquesa);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .faq-item p {
+            color: var(--gris-claro);
+            font-size: 0.9rem;
+            padding-left: 1.9rem;
+        }
+
+        /* CTA */
+        .cta-final {
+            background: linear-gradient(135deg, var(--rosa-mexicano), var(--naranja), var(--amarillo));
+            padding: 5rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-final h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-final p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa {
+            background: white;
+            color: var(--rosa-mexicano);
+        }
+
+        .btn-wa:hover {
+            background: var(--amarillo);
+            color: var(--gris-texto);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            border: 3px solid rgba(255,255,255,0.5);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* UBICACIÓN */
+        .ubicacion { background: white; }
+
+        .ubicacion-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .ubicacion-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ubicacion-lista {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .ubicacion-lista li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+        }
+
+        .ubicacion-lista .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--turquesa-claro);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .ubicacion-lista strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .ubicacion-lista span {
+            font-size: 0.85rem;
+            color: var(--gris-claro);
+        }
+
+        .ubicacion-map {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid var(--crema);
+        }
+
+        .ubicacion-map iframe {
+            width: 100%;
+            height: 320px;
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--gris-texto);
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-brand .logo { margin-bottom: 1rem; }
+        .footer-brand .logo-text { color: white; }
+        .footer-brand p { font-size: 0.9rem; margin-bottom: 1rem; }
+
+        .footer-social {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-social a:hover { background: var(--rosa-mexicano); }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .footer-col ul { list-style: none; }
+
+        .footer-col li { margin-bottom: 0.5rem; }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .footer-col a:hover { color: var(--amarillo); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* WHATSAPP FLOAT */
+        .wa-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 25px rgba(37,211,102,0.4);
+            z-index: 999;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+            font-size: 1.8rem;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 5px 35px rgba(37,211,102,0.6); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { order: 2; }
+            .hero-images { order: 1; max-width: 400px; margin: 0 auto 2rem; }
+            .hero-checks { justify-content: center; }
+            .hero-btns { justify-content: center; }
+            
+            .stats { grid-template-columns: repeat(3, 1fr); }
+            .programas-grid, .testimonios-grid, .horarios-grid, .precios-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .horario-card.destacado, .precio-card.popular { transform: none; }
+            
+            .alimentacion-content, .ubicacion-content { grid-template-columns: 1fr; }
+            .alimentacion-text .section-tag, .alimentacion-text .section-title { text-align: center; }
+            .alimentacion-text { text-align: center; }
+            
+            .seguridad-grid, .equipo-grid { grid-template-columns: repeat(2, 1fr); }
+            .instalaciones-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .instalacion:first-child { grid-column: span 2; grid-row: span 1; }
+            
+            .faq-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta { display: none; }
+            .menu-btn { display: block; }
+            
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .hero-checks { grid-template-columns: 1fr; }
+            .seguridad-grid, .equipo-grid { grid-template-columns: 1fr; max-width: 280px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-social { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <span class="logo-emoji">⭐</span>
+            Pequeños <span>Brillantes</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#programas">Programas</a></li>
+            <li><a href="#instalaciones">Instalaciones</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <a href="#contacto" class="nav-cta">Agendar Visita</a>
+        <button class="menu-btn">☰</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✓ Incorporados a la SEP · Clave: 19PJN0847K</div>
+            <h1>El lugar donde tu pequeño <em>aprende jugando</em> mientras tú trabajas tranquilo</h1>
+            <p class="hero-text">Guardería y preescolar en Monterrey con 12 años cuidando familias. Cámaras en vivo, comida casera y el cariño que tu hijo merece.</p>
+            
+            <div class="hero-checks">
+                <div class="hero-check"><span>📹</span> Cámaras 24/7</div>
+                <div class="hero-check"><span>👶</span> Desde 45 días</div>
+                <div class="hero-check"><span>🕐</span> 7am a 7pm</div>
+                <div class="hero-check"><span>🍎</span> Comidas incluidas</div>
+            </div>
+
+            <div class="hero-btns">
+                <a href="https://wa.me/528112345678?text=Hola,%20me%20interesa%20agendar%20una%20visita" class="btn btn-primary">📲 Agendar visita gratis</a>
+                <a href="tel:+528112345678" class="btn btn-secondary">📞 (81) 1234-5678</a>
+            </div>
+        </div>
+
+        <div class="hero-images">
+            <img src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Niños jugando" class="hero-img-main">
+            <img src="https://images.pexels.com/photos/8612927/pexels-photo-8612927.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Maestra con niños" class="hero-img-small">
+            <div class="hero-card c1">🛡️ <span>100% Seguro</span></div>
+            <div class="hero-card c2">⭐ <span>4.9 en Google</span></div>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Años</div></div>
+        <div class="stat"><div class="stat-num">230</div><div class="stat-label">Familias</div></div>
+        <div class="stat"><div class="stat-num">1:6</div><div class="stat-label">Ratio</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Certificados</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Comidas/día</div></div>
+    </div>
+
+    <section class="programas" id="programas">
+        <div class="section-header">
+            <div class="section-tag">Nuestros Programas</div>
+            <h2 class="section-title">Educación adaptada a cada etapa</h2>
+            <p class="section-desc">Programas avalados por la SEP para el desarrollo integral de tu pequeño.</p>
+        </div>
+
+        <div class="programas-grid">
+            <div class="programa-card">
+                <img src="https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Bebés" class="programa-img">
+                <div class="programa-body">
+                    <span class="programa-edad">45 días - 2 años</span>
+                    <h3>Sala de Bebés</h3>
+                    <p>Estimulación temprana y mucho amor para los más chiquitos.</p>
+                    <ul class="programa-list">
+                        <li>Estimulación personalizada</li>
+                        <li>Música y psicomotricidad</li>
+                        <li>Área de siesta climatizada</li>
+                        <li>Cámaras para los papás</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="programa-card">
+                <img src="https://images.pexels.com/photos/8613312/pexels-photo-8613312.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Maternal" class="programa-img">
+                <div class="programa-body">
+                    <span class="programa-edad">2 - 4 años</span>
+                    <h3>Maternal</h3>
+                    <p>Desarrollo del lenguaje y habilidades sociales con juego dirigido.</p>
+                    <ul class="programa-list">
+                        <li>Control de esfínteres</li>
+                        <li>Inglés básico diario</li>
+                        <li>Arte y expresión</li>
+                        <li>Educación socioemocional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="programa-card">
+                <img src="https://images.pexels.com/photos/8613165/pexels-photo-8613165.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Preescolar" class="programa-img">
+                <div class="programa-body">
+                    <span class="programa-edad">4 - 6 años</span>
+                    <h3>Preescolar (Kinder)</h3>
+                    <p>Programa SEP con lectoescritura y preparación para primaria.</p>
+                    <ul class="programa-list">
+                        <li>Programa oficial SEP</li>
+                        <li>Lectoescritura y mate</li>
+                        <li>Inglés intermedio</li>
+                        <li>Eventos y festivales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="horarios">
+        <div class="section-header">
+            <div class="section-tag">Horarios Flexibles</div>
+            <h2 class="section-title">Nos adaptamos a tu jornada</h2>
+            <p class="section-desc">Porque cada familia tiene necesidades diferentes.</p>
+        </div>
+
+        <div class="horarios-grid">
+            <div class="horario-card">
+                <h3>Medio Tiempo</h3>
+                <div class="horario-time">7am - 2pm</div>
+                <p class="horario-desc">Para mamás que trabajan mañanas</p>
+                <ul class="horario-list">
+                    <li>✓ Desayuno incluido</li>
+                    <li>✓ Comida incluida</li>
+                    <li>✓ Programa completo</li>
+                </ul>
+            </div>
+
+            <div class="horario-card destacado">
+                <span class="horario-badge">Más Popular</span>
+                <h3>Tiempo Completo</h3>
+                <div class="horario-time">7am - 6pm</div>
+                <p class="horario-desc">Ideal para horario de oficina</p>
+                <ul class="horario-list">
+                    <li>✓ 3 comidas completas</li>
+                    <li>✓ 2 colaciones</li>
+                    <li>✓ Siesta supervisada</li>
+                    <li>✓ Tareas incluidas</li>
+                </ul>
+            </div>
+
+            <div class="horario-card">
+                <h3>Extendido</h3>
+                <div class="horario-time">7am - 7pm</div>
+                <p class="horario-desc">Para jornadas largas</p>
+                <ul class="horario-list">
+                    <li>✓ Todo lo de T. Completo</li>
+                    <li>✓ Merienda adicional</li>
+                    <li>✓ Actividades extras</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="instalaciones" id="instalaciones">
+        <div class="section-header">
+            <div class="section-tag">Instalaciones</div>
+            <h2 class="section-title">800m² diseñados para aprender</h2>
+            <p class="section-desc">Espacios seguros, coloridos y estimulantes.</p>
+        </div>
+
+        <div class="instalaciones-grid">
+            <div class="instalacion" data-label="Salones amplios y climatizados">
+                <img src="https://images.pexels.com/photos/8613318/pexels-photo-8613318.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Salón">
+            </div>
+            <div class="instalacion" data-label="Área de juegos">
+                <img src="https://images.pexels.com/photos/8612976/pexels-photo-8612976.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Juegos">
+            </div>
+            <div class="instalacion" data-label="Comedor">
+                <img src="https://images.pexels.com/photos/5692252/pexels-photo-5692252.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Comedor">
+            </div>
+            <div class="instalacion" data-label="Patio exterior">
+                <img src="https://images.pexels.com/photos/8613070/pexels-photo-8613070.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Patio">
+            </div>
+            <div class="instalacion" data-label="Sala de siesta">
+                <img src="https://images.pexels.com/photos/6957685/pexels-photo-6957685.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Siesta">
+            </div>
+        </div>
+    </section>
+
+    <section class="alimentacion">
+        <div class="alimentacion-content">
+            <div class="alimentacion-text">
+                <div class="section-tag">Alimentación</div>
+                <h2 class="section-title">Menús nutritivos hechos en casa</h2>
+                <p>Nada de comida procesada. Cocinamos diario platillos caseros, balanceados y aprobados por nutrióloga. Nos adaptamos a alergias.</p>
+                
+                <div class="menu-box">
+                    <h4>🍽️ Ejemplo de menú del día</h4>
+                    <div class="menu-items">
+                        <div class="menu-item"><span>🌅</span> Huevo con frijolitos</div>
+                        <div class="menu-item"><span>🍌</span> Plátano con granola</div>
+                        <div class="menu-item"><span>🍲</span> Sopa, pollo y arroz</div>
+                        <div class="menu-item"><span>🥛</span> Yogurt con miel</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alimentacion-imgs">
+                <img src="https://images.pexels.com/photos/5692251/pexels-photo-5692251.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Niños comiendo">
+                <img src="https://images.pexels.com/photos/5692262/pexels-photo-5692262.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Comida">
+                <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Frutas">
+            </div>
+        </div>
+    </section>
+
+    <section class="seguridad">
+        <div class="section-header">
+            <div class="section-tag">Tu Tranquilidad</div>
+            <h2 class="section-title">La seguridad de tu hijo es prioridad #1</h2>
+            <p class="section-desc">Protocolos estrictos para que trabajes sin preocupaciones.</p>
+        </div>
+
+        <div class="seguridad-grid">
+            <div class="seg-item">
+                <div class="seg-icon">📹</div>
+                <h4>Cámaras en Vivo</h4>
+                <p>Ve a tu hijo desde el celular cuando quieras.</p>
+            </div>
+            <div class="seg-item">
+                <div class="seg-icon">🔐</div>
+                <h4>Acceso Controlado</h4>
+                <p>Solo personas autorizadas con código.</p>
+            </div>
+            <div class="seg-item">
+                <div class="seg-icon">🩺</div>
+                <h4>Enfermera</h4>
+                <p>Personal de salud presente todo el día.</p>
+            </div>
+            <div class="seg-item">
+                <div class="seg-icon">🧯</div>
+                <h4>Emergencias</h4>
+                <p>Simulacros mensuales y plan certificado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="equipo">
+        <div class="section-header">
+            <div class="section-tag">Nuestro Equipo</div>
+            <h2 class="section-title">Profesionales que aman lo que hacen</h2>
+        </div>
+
+        <div class="equipo-grid">
+            <div class="persona">
+                <img src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Directora" class="persona-foto">
+                <h4>Lic. María del Carmen</h4>
+                <p class="cargo">Directora General</p>
+                <p class="bio">15 años en educación. Mamá de 3.</p>
+            </div>
+            <div class="persona">
+                <img src="https://images.pexels.com/photos/3768144/pexels-photo-3768144.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Coordinadora" class="persona-foto">
+                <h4>Lic. Ana Sofía</h4>
+                <p class="cargo">Coordinadora</p>
+                <p class="bio">Especialista en desarrollo infantil.</p>
+            </div>
+            <div class="persona">
+                <img src="https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Maestra" class="persona-foto">
+                <h4>Miss Lupita</h4>
+                <p class="cargo">Maestra Maternal</p>
+                <p class="bio">Certificada en Montessori.</p>
+            </div>
+            <div class="persona">
+                <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Nutrióloga" class="persona-foto">
+                <h4>Dra. Fernanda</h4>
+                <p class="cargo">Nutrióloga</p>
+                <p class="bio">Diseña nuestros menús semanales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonios">
+        <div class="section-header">
+            <div class="section-tag">Testimonios</div>
+            <h2 class="section-title">Lo que dicen las familias</h2>
+        </div>
+
+        <div class="testimonios-grid">
+            <div class="testimonio">
+                <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonio-text">"Mi Sofía entró llorando y ahora no se quiere ir. Las cámaras me dan muchísima tranquilidad en la chamba. Súper recomendado."</p>
+                <div class="testimonio-author">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Gaby">
+                    <div><strong>Gabriela Treviño</strong><span>Mamá de Sofía · San Pedro</span></div>
+                </div>
+            </div>
+
+            <div class="testimonio">
+                <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonio-text">"Ya van 3 hijos que pasan por aquí. La calidad sigue igual desde hace años. Los niños salen súper preparados para la primaria."</p>
+                <div class="testimonio-author">
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Roberto">
+                    <div><strong>Roberto Cantú</strong><span>Papá de 3 egresados · Cumbres</span></div>
+                </div>
+            </div>
+
+            <div class="testimonio">
+                <div class="testimonio-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonio-text">"Me encanta la comunicación. Fotos diarias, me avisan qué comió, cómo durmió. Se nota que realmente les importa mi hijo."</p>
+                <div class="testimonio-author">
+                    <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Paty">
+                    <div><strong>Patricia Lozano</strong><span>Mamá de Emiliano · Del Valle</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="precios" id="precios">
+        <div class="section-header">
+            <div class="section-tag">Inversión</div>
+            <h2 class="section-title">Planes para cada familia</h2>
+            <p class="section-desc">Inscripción incluye uniforme, material y seguro.</p>
+        </div>
+
+        <div class="precios-grid">
+            <div class="precio-card">
+                <h3>Sala de Bebés</h3>
+                <p class="precio-edad">45 días - 2 años</p>
+                <div class="precio-monto">$5,800 <span>/mes</span></div>
+                <p class="precio-nota">Inscripción: $3,500</p>
+                <ul class="precio-list">
+                    <li>✓ Ratio 1:4</li>
+                    <li>✓ Estimulación temprana</li>
+                    <li>✓ 3 comidas + 2 colaciones</li>
+                    <li>✓ Pañales incluidos</li>
+                </ul>
+                <a href="#contacto" class="precio-btn">Más información</a>
+            </div>
+
+            <div class="precio-card popular">
+                <span class="precio-badge">Más Popular</span>
+                <h3>Maternal + Kinder</h3>
+                <p class="precio-edad">2 - 6 años</p>
+                <div class="precio-monto">$4,500 <span>/mes</span></div>
+                <p class="precio-nota">Inscripción: $3,000</p>
+                <ul class="precio-list">
+                    <li>✓ Programa SEP</li>
+                    <li>✓ Inglés diario</li>
+                    <li>✓ 3 comidas + 2 colaciones</li>
+                    <li>✓ Horario 7am - 6pm</li>
+                </ul>
+                <a href="#contacto" class="precio-btn">Agendar visita</a>
+            </div>
+
+            <div class="precio-card">
+                <h3>Horario Extendido</h3>
+                <p class="precio-edad">Adicional</p>
+                <div class="precio-monto">+$800 <span>/mes</span></div>
+                <p class="precio-nota">De 6pm a 7pm</p>
+                <ul class="precio-list">
+                    <li>✓ Merienda extra</li>
+                    <li>✓ Actividades recreativas</li>
+                    <li>✓ Flexibilidad diaria</li>
+                    <li>✓ Sin compromiso</li>
+                </ul>
+                <a href="#contacto" class="precio-btn">Más información</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="section-header">
+            <div class="section-tag">Preguntas Frecuentes</div>
+            <h2 class="section-title">¿Tienes dudas?</h2>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>¿Desde qué edad reciben bebés?</h4>
+                <p>Desde los 45 días. Tenemos sala especial con cunas, área de lactancia y personal especializado.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Cómo funcionan las cámaras?</h4>
+                <p>Te damos acceso a una app privada donde ves a tu hijo en tiempo real desde cualquier dispositivo.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Qué pasa con las alergias?</h4>
+                <p>Nos adaptamos completamente. Nuestra nutrióloga diseña menús especiales para cada caso.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Tienen validez oficial?</h4>
+                <p>Sí, estamos incorporados a la SEP (clave 19PJN0847K). Documentos oficiales para primaria.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Qué incluye la inscripción?</h4>
+                <p>Uniforme completo (2 pants, 2 playeras, chamarra), material didáctico, seguro y credencial.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Puedo conocer las instalaciones?</h4>
+                <p>¡Claro! Agenda por WhatsApp y te damos un recorrido. Conoces maestras y ves cómo trabajan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final" id="contacto">
+        <h2>¿Listo para conocernos? 🌟</h2>
+        <p>Agenda una visita sin compromiso. Te mostramos todo, conoces al equipo y resolvemos tus dudas.</p>
+        <div class="cta-btns">
+            <a href="https://wa.me/528112345678?text=Hola,%20quiero%20agendar%20una%20visita" class="btn btn-wa">📲 Agendar visita gratis</a>
+            <a href="#ubicacion" class="btn btn-ghost">📍 Ver ubicación</a>
+        </div>
+    </section>
+
+    <section class="ubicacion" id="ubicacion">
+        <div class="ubicacion-content">
+            <div class="ubicacion-info">
+                <h3>Encuéntranos en Monterrey</h3>
+                <ul class="ubicacion-lista">
+                    <li>
+                        <div class="icon">📍</div>
+                        <div><strong>Av. Alfonso Reyes #1234</strong><span>Col. Contry, Monterrey, N.L.</span></div>
+                    </li>
+                    <li>
+                        <div class="icon">📞</div>
+                        <div><strong>(81) 1234-5678</strong><span>Lunes a Viernes, 7am - 7pm</span></div>
+                    </li>
+                    <li>
+                        <div class="icon">✉️</div>
+                        <div><strong>info@pequenosbrillantes.mx</strong><span>Respondemos en menos de 24hrs</span></div>
+                    </li>
+                </ul>
+                <a href="https://wa.me/528112345678" class="btn btn-primary">Escríbenos por WhatsApp</a>
+            </div>
+            <div class="ubicacion-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.0673895821994!2d-100.31649032396407!3d25.65939647745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662bfb5e2f0c91d%3A0x94a4f99f42c93d81!2sMonterrey%2C%20N.L.!5e0!3m2!1ses!2smx!4v1699999999999!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-emoji">⭐</span> Pequeños <span>Brillantes</span></div>
+                <p>Cuidando y educando a tu pequeño desde 2012. Guardería y preescolar en Monterrey.</p>
+                <div class="footer-social">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🎵</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Programas</h4>
+                <ul>
+                    <li><a href="#">Sala de Bebés</a></li>
+                    <li><a href="#">Maternal</a></li>
+                    <li><a href="#">Preescolar</a></li>
+                    <li><a href="#">Verano</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Nosotros</h4>
+                <ul>
+                    <li><a href="#">Historia</a></li>
+                    <li><a href="#">Equipo</a></li>
+                    <li><a href="#">Instalaciones</a></li>
+                    <li><a href="#">Trabaja aquí</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Alfonso Reyes #1234</a></li>
+                    <li><a href="#">Contry, Monterrey</a></li>
+                    <li><a href="tel:+528112345678">(81) 1234-5678</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Pequeños Brillantes. Incorporados a la SEP: 19PJN0847K</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/528112345678?text=Hola,%20me%20interesa%20la%20guardería" class="wa-float">💬</a>
+</body>
+</html>

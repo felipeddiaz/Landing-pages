@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUERZA BRUTA | Gimnasio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --concrete: #1a1a1a;
+            --steel: #2d2d2d;
+            --rust: #8b4513;
+            --neon-lime: #c8ff00;
+            --neon-orange: #ff6b35;
+            --bone: #e8e4de;
+            --sweat: #f5f5dc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--black);
+            color: var(--bone);
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, var(--black), transparent);
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--neon-lime);
+        }
+
+        .logo span {
+            color: var(--bone);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--bone);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-lime);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .hero-left {
+            padding: 8rem 4rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-left::before {
+            content: '01';
+            position: absolute;
+            top: 8rem;
+            left: 4rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8rem;
+            color: var(--steel);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-title .highlight {
+            color: var(--neon-lime);
+            display: block;
+            transform: translateX(-0.5rem);
+        }
+
+        .hero-title .stroke-text {
+            -webkit-text-stroke: 2px var(--bone);
+            color: transparent;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-desc {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 400px;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            padding: 1rem 2.5rem;
+            background: var(--neon-lime);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--bone);
+            border: 1px solid var(--steel);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--neon-orange);
+            color: var(--neon-orange);
+        }
+
+        .hero-right {
+            position: relative;
+            background: var(--concrete);
+            overflow: hidden;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, var(--neon-lime) 0%, transparent 50%),
+                linear-gradient(225deg, var(--neon-orange) 0%, transparent 50%),
+                var(--steel);
+            opacity: 0.15;
+        }
+
+        .weight-illustration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 20px solid var(--bone);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .weight-illustration::before {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: var(--neon-lime);
+            border-radius: 50%;
+        }
+
+        .weight-illustration::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 40px;
+            background: var(--bone);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(5deg); }
+        }
+
+        .floating-text {
+            position: absolute;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12rem;
+            color: var(--bone);
+            opacity: 0.03;
+            white-space: nowrap;
+            animation: scroll 20s linear infinite;
+        }
+
+        .floating-text.top {
+            top: 10%;
+        }
+
+        .floating-text.bottom {
+            bottom: 10%;
+            animation-direction: reverse;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--concrete);
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            border-top: 1px solid var(--steel);
+            border-bottom: 1px solid var(--steel);
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: var(--steel);
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        .stat-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            color: var(--neon-lime);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            opacity: 0.5;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: var(--steel);
+            line-height: 1;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--steel);
+        }
+
+        .program-card {
+            background: var(--black);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--neon-lime);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-card:hover {
+            background: var(--concrete);
+        }
+
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            border: 2px solid var(--neon-orange);
+            color: var(--neon-orange);
+        }
+
+        .program-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .program-desc {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+
+        .program-meta {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .program-meta span {
+            color: var(--neon-lime);
+        }
+
+        /* Feature Section */
+        .feature {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            min-height: 80vh;
+        }
+
+        .feature-content {
+            background: var(--neon-lime);
+            color: var(--black);
+            padding: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            opacity: 0.6;
+        }
+
+        .feature-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            line-height: 1.9;
+            max-width: 450px;
+            margin-bottom: 3rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .feature-list li {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: '//';
+            opacity: 0.4;
+        }
+
+        .feature-visual {
+            background: var(--concrete);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-visual::before {
+            content: 'ENTRENA DURO';
+            position: absolute;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 8rem;
+            color: var(--bone);
+            opacity: 0.03;
+            transform: rotate(-90deg);
+            white-space: nowrap;
+            right: -20%;
+            top: 50%;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--neon-orange);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: rotate 20s linear infinite;
+        }
+
+        .geometric-shape::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border: 3px solid var(--neon-lime);
+            transform: rotate(15deg);
+        }
+
+        @keyframes rotate {
+            to { transform: translate(-50%, -50%) rotate(405deg); }
+        }
+
+        /* Schedule Section */
+        .schedule {
+            padding: 8rem 4rem;
+            background: var(--concrete);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--steel);
+            margin-top: 4rem;
+        }
+
+        .schedule-day {
+            background: var(--black);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .day-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-orange);
+        }
+
+        .day-classes {
+            font-size: 0.7rem;
+            line-height: 2;
+            opacity: 0.6;
+        }
+
+        .day-classes strong {
+            display: block;
+            color: var(--neon-lime);
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 8rem 4rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .price-card {
+            border: 1px solid var(--steel);
+            padding: 3rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .price-card.featured {
+            border-color: var(--neon-lime);
+            transform: scale(1.05);
+        }
+
+        .price-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--neon-lime);
+            color: var(--black);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            padding: 0.3rem 1rem;
+        }
+
+        .price-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            color: var(--neon-lime);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount span {
+            font-size: 1rem;
+            color: var(--bone);
+            opacity: 0.5;
+        }
+
+        .price-period {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 2rem;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .price-features li {
+            font-size: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--steel);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-features li::before {
+            content: '+';
+            color: var(--neon-orange);
+            font-weight: bold;
+        }
+
+        .price-card .btn-primary {
+            width: 100%;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 4rem;
+            background: var(--steel);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '"';
+            position: absolute;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 40rem;
+            color: var(--bone);
+            opacity: 0.02;
+            top: -10%;
+            right: -5%;
+            line-height: 1;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 4rem auto 0;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .testimonial-author span {
+            color: var(--neon-lime);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 10rem 4rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--black), var(--concrete));
+        }
+
+        .cta-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .cta-title .accent {
+            color: var(--neon-orange);
+        }
+
+        .cta-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--steel);
+            padding: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            color: var(--neon-lime);
+            margin-bottom: 1rem;
+        }
+
+        .footer-desc {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            opacity: 0.5;
+            max-width: 300px;
+        }
+
+        .footer-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--neon-orange);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: var(--bone);
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--steel);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-right {
+                min-height: 50vh;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-left {
+                padding: 6rem 2rem 4rem;
+            }
+            
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .programs,
+            .pricing,
+            .schedule {
+                padding: 4rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">FUERZA<span>BRUTA</span></div>
+        <ul class="nav-links">
+            <li><a href="#programs">Programas</a></li>
+            <li><a href="#schedule">Horarios</a></li>
+            <li><a href="#pricing">Membresías</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <h1 class="hero-title">
+                <span class="stroke-text">Rompe</span>
+                <span class="highlight">Tus</span>
+                Límites
+            </h1>
+            <p class="hero-desc">No somos un gimnasio convencional. Somos una fábrica de guerreros. Aquí el sudor es la moneda y los resultados son la recompensa.</p>
+            <div class="hero-cta">
+                <button class="btn-primary">ÚNETE AHORA</button>
+                <button class="btn-secondary">Ver Instalaciones →</button>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-visual"></div>
+            <div class="weight-illustration"></div>
+            <div class="floating-text top">ENTRENA • SUDA • CONQUISTA • ENTRENA • SUDA • CONQUISTA • </div>
+            <div class="floating-text bottom">SIN DOLOR NO HAY GLORIA • SIN DOLOR NO HAY GLORIA • </div>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">847</div>
+            <div class="stat-label">Miembros Activos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Entrenadores Elite</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Acceso Total</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">2.5K</div>
+            <div class="stat-label">M² de Instalaciones</div>
+        </div>
+    </section>
+
+    <section class="programs" id="programs">
+        <div class="section-header">
+            <div>
+                <div class="section-number">02</div>
+                <h2 class="section-title">Programas</h2>
+            </div>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-icon">FB</div>
+                <h3 class="program-name">Fuerza Bruta</h3>
+                <p class="program-desc">Levantamiento de potencia y entrenamiento de fuerza máxima. Para quienes buscan romper récords personales.</p>
+                <div class="program-meta">
+                    <span>60 MIN</span>
+                    <span>ALTA INTENSIDAD</span>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">HT</div>
+                <h3 class="program-name">HIIT Tactical</h3>
+                <p class="program-desc">Intervalos de alta intensidad con enfoque militar. Quema grasa y construye resistencia extrema.</p>
+                <div class="program-meta">
+                    <span>45 MIN</span>
+                    <span>CARDIO EXTREMO</span>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">CF</div>
+                <h3 class="program-name">Cross Funcional</h3>
+                <p class="program-desc">Entrenamiento funcional variado. Cada día es diferente, cada sesión es un desafío nuevo.</p>
+                <div class="program-meta">
+                    <span>50 MIN</span>
+                    <span>FULL BODY</span>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">BX</div>
+                <h3 class="program-name">Box Training</h3>
+                <p class="program-desc">Técnicas de boxeo combinadas con acondicionamiento físico. Golpea, esquiva, conquista.</p>
+                <div class="program-meta">
+                    <span>60 MIN</span>
+                    <span>COMBATE</span>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">MV</div>
+                <h3 class="program-name">Movilidad</h3>
+                <p class="program-desc">Recuperación activa, flexibilidad y movilidad articular. El complemento perfecto para tu rutina.</p>
+                <div class="program-meta">
+                    <span>30 MIN</span>
+                    <span>RECOVERY</span>
+                </div>
+            </div>
+            <div class="program-card">
+                <div class="program-icon">1:1</div>
+                <h3 class="program-name">Personal Elite</h3>
+                <p class="program-desc">Entrenamiento personalizado con coach dedicado. Resultados garantizados en 90 días.</p>
+                <div class="program-meta">
+                    <span>60 MIN</span>
+                    <span>EXCLUSIVO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature">
+        <div class="feature-content">
+            <div class="feature-label">Instalaciones Premium</div>
+            <h2 class="feature-title">Equipamiento de Nivel Competitivo</h2>
+            <p class="feature-text">Más de 2,500 metros cuadrados diseñados para el rendimiento máximo. Cada máquina, cada barra, cada kilogramo está pensado para atletas que buscan la excelencia.</p>
+            <ul class="feature-list">
+                <li>Zona de Peso Libre</li>
+                <li>Área de Cardio</li>
+                <li>Ring de Boxeo</li>
+                <li>Cuerdas de Batalla</li>
+                <li>Zona de Stretching</li>
+                <li>Sauna y Vapor</li>
+                <li>Duchas Premium</li>
+                <li>Lockers Seguros</li>
+            </ul>
+        </div>
+        <div class="feature-visual">
+            <div class="geometric-shape"></div>
+        </div>
+    </section>
+
+    <section class="schedule" id="schedule">
+        <div class="section-header">
+            <div>
+                <div class="section-number">03</div>
+                <h2 class="section-title">Horarios</h2>
+            </div>
+        </div>
+        <div class="schedule-grid">
+            <div class="schedule-day">
+                <div class="day-name">Lun</div>
+                <div class="day-classes">
+                    06:00 - HIIT
+                    <strong>07:00 - Fuerza</strong>
+                    12:00 - Cross
+                    <strong>18:00 - Box</strong>
+                    20:00 - Movilidad
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Mar</div>
+                <div class="day-classes">
+                    <strong>06:00 - Fuerza</strong>
+                    07:00 - Cross
+                    12:00 - HIIT
+                    18:00 - Movilidad
+                    <strong>20:00 - Box</strong>
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Mié</div>
+                <div class="day-classes">
+                    06:00 - Cross
+                    <strong>07:00 - HIIT</strong>
+                    12:00 - Fuerza
+                    <strong>18:00 - Box</strong>
+                    20:00 - Cross
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Jue</div>
+                <div class="day-classes">
+                    <strong>06:00 - Fuerza</strong>
+                    07:00 - Movilidad
+                    12:00 - HIIT
+                    18:00 - Cross
+                    <strong>20:00 - Fuerza</strong>
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Vie</div>
+                <div class="day-classes">
+                    06:00 - HIIT
+                    <strong>07:00 - Box</strong>
+                    12:00 - Cross
+                    <strong>18:00 - Fuerza</strong>
+                    20:00 - HIIT
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Sáb</div>
+                <div class="day-classes">
+                    <strong>08:00 - Cross</strong>
+                    10:00 - Fuerza
+                    <strong>12:00 - Box</strong>
+                    14:00 - HIIT
+                </div>
+            </div>
+            <div class="schedule-day">
+                <div class="day-name">Dom</div>
+                <div class="day-classes">
+                    09:00 - Movilidad
+                    <strong>10:00 - Cross</strong>
+                    12:00 - Open Gym
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <div>
+                <div class="section-number">04</div>
+                <h2 class="section-title">Membresías</h2>
+            </div>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-name">Básico</div>
+                <div class="price-amount">$599<span>MXN</span></div>
+                <div class="price-period">Por Mes</div>
+                <ul class="price-features">
+                    <li>Acceso a instalaciones</li>
+                    <li>Horario: 6AM - 10PM</li>
+                    <li>Zona de peso libre</li>
+                    <li>Área de cardio</li>
+                </ul>
+                <button class="btn-primary">Elegir Plan</button>
+            </div>
+            <div class="price-card featured">
+                <div class="price-name">Warrior</div>
+                <div class="price-amount">$899<span>MXN</span></div>
+                <div class="price-period">Por Mes</div>
+                <ul class="price-features">
+                    <li>Acceso 24/7</li>
+                    <li>Todas las clases grupales</li>
+                    <li>Sauna y vapor</li>
+                    <li>App de seguimiento</li>
+                    <li>1 sesión personal/mes</li>
+                </ul>
+                <button class="btn-primary">Elegir Plan</button>
+            </div>
+            <div class="price-card">
+                <div class="price-name">Elite</div>
+                <div class="price-amount">$1,499<span>MXN</span></div>
+                <div class="price-period">Por Mes</div>
+                <ul class="price-features">
+                    <li>Todo lo de Warrior</li>
+                    <li>4 sesiones personales/mes</li>
+                    <li>Nutriólogo incluido</li>
+                    <li>Locker premium privado</li>
+                    <li>Acceso a eventos VIP</li>
+                </ul>
+                <button class="btn-primary">Elegir Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header">
+            <div>
+                <div class="section-number">05</div>
+                <h2 class="section-title">Testimonios</h2>
+            </div>
+        </div>
+        <div class="testimonial-slider">
+            <p class="testimonial-text">"Llevo 8 meses en Fuerza Bruta y he transformado completamente mi cuerpo y mi mente. Los entrenadores son brutales en el mejor sentido."</p>
+            <div class="testimonial-author">Carlos Mendoza — <span>Miembro Elite</span></div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <h2 class="cta-title">Tu <span class="accent">Transformación</span> Comienza Hoy</h2>
+        <p class="cta-subtitle">Primera clase gratis. Sin compromisos. Solo resultados.</p>
+        <button class="btn-primary">AGENDAR CLASE GRATIS</button>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">FUERZA BRUTA</div>
+                <p class="footer-desc">Gimnasio de alto rendimiento para atletas que buscan superar sus límites. Desde 2018 transformando cuerpos y mentes.</p>
+            </div>
+            <div>
+                <div class="footer-title">Navegación</div>
+                <ul class="footer-links">
+                    <li><a href="#programs">Programas</a></li>
+                    <li><a href="#schedule">Horarios</a></li>
+                    <li><a href="#pricing">Membresías</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Horarios</div>
+                <ul class="footer-links">
+                    <li><a href="#">Lun - Vie: 24 Horas</a></li>
+                    <li><a href="#">Sáb: 6AM - 8PM</a></li>
+                    <li><a href="#">Dom: 8AM - 4PM</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">Contacto</div>
+                <ul class="footer-links">
+                    <li><a href="#">Av. Revolución 1847</a></li>
+                    <li><a href="#">Col. San Ángel, CDMX</a></li>
+                    <li><a href="#">+52 55 1234 5678</a></li>
+                    <li><a href="#">info@fuerzabruta.mx</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2024 Fuerza Bruta. Todos los derechos reservados.</span>
+            <span>Diseñado para guerreros</span>
+        </div>
+    </footer>
+
+    <script>
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-text');
+            parallaxElements.forEach((el, i) => {
+                const speed = i % 2 === 0 ? 0.5 : -0.5;
+                el.style.transform = `translateX(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.program-card, .price-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
